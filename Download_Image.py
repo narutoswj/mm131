@@ -33,10 +33,11 @@ def download_20_pages(skip):
             print(url)
             data = urllib.urlopen(url).read()
             path = local_folder + '/' + title + '_' + number.__str__() + '.jpg'
-            f = file(path,"wb")
-            f.write(data)
-            f.flush()
-            f.close()
+            if not (os.path.exists(path)):
+                f = file(path,"wb")
+                f.write(data)
+                f.flush()
+                f.close()
             number = number + 1
         collection.update({"_id":doc["_id"]},{"$set":{"images_downloaded":1}})
 

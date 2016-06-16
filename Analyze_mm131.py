@@ -65,6 +65,7 @@ def Get_Subpage_List(root_folder,url):
                         os.makedirs(folder)
                 except Exception, e:
                     print e
+                    collection_log.inset({"Error": link_url })
                 print "First image: " + first_image_url
                 print "Total page: " + total_image_count
                 count = collection.find({"first_page":first_image_url}).count()
