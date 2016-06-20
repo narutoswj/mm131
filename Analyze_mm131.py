@@ -87,6 +87,7 @@ def Get_Subpage_List(root_folder,url):
         return True
 
 #Parameters#
+print "start"
 local_folder = 'D:/Image/mm131.com/'
 first_page = 'http://www.mm131.com/mingxing/'
 first_page_list = ['http://www.mm131.com/xinggan/',
