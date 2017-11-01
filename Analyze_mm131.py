@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-import pyquery
-import pymongo
 import datetime
 import os
 import sys
+import pymongo
+import pyquery
+
 
 def Get_Max_page(url):
     from pyquery import PyQuery as pq

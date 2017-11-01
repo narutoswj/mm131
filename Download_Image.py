@@ -6,7 +6,7 @@ import os
 import sys
 import urllib
 import threading
-from time import ctime,sleep
+from time import ctime, sleep
 
 
 def download_20_pages(skip):
@@ -16,7 +16,7 @@ def download_20_pages(skip):
     db = client.beauty
     # Use collection
     collection = db['mm131']
-    docs = collection.find({"images_downloaded":None}).limit(20).skip(skip)
+    docs = collection.find({"images_downloaded": None}).limit(20).skip(skip)
     for doc in docs:
         # print doc
         local_folder = doc["local_folder"]
@@ -34,12 +34,19 @@ def download_20_pages(skip):
             data = urllib.urlopen(url).read()
             path = local_folder + '/' + title + '_' + number.__str__() + '.jpg'
             if not (os.path.exists(path)):
-                f = file(path,"wb")
+                f = file(path, "wb")
                 f.write(data)
                 f.flush()
                 f.close()
             number = number + 1
-        collection.update({"_id":doc["_id"]},{"$set":{"images_downloaded":1}})
+        collection.update({
+            "_id": doc["_id"]
+        }, {
+            "$set": {
+                "images_downloaded": 1
+            }
+        })
+
 
 # Connect MongoDB Server
 client = pymongo.MongoClient(host="127.0.0.1", port=27017)
@@ -47,11 +54,11 @@ client = pymongo.MongoClient(host="127.0.0.1", port=27017)
 db = client.beauty
 # Use collection
 collection = db['mm131']
-count = collection.find({"images_downloaded":None}).count()
+count = collection.find({"images_downloaded": None}).count()
 
 while count > 0:
     threads = []
-    t1 = threading.Thread(target=download_20_pages,args=(0,))
+    t1 = threading.Thread(target=download_20_pages, args=(0, ))
     threads.append(t1)
     #t2 = threading.Thread(target=download_20_pages,args=(20,))
     #threads.append(t2)
@@ -64,5 +71,4 @@ while count > 0:
         t.setDaemon(True)
         t.start()
     t.join()
-    count = collection.find({"images_downloaded":None}).count()
-
+    count = collection.find({"images_downloaded": None}).count()
