@@ -89,7 +89,7 @@ def Get_Subpage_List(root_folder,url):
 
 #Parameters#
 print "start"
-local_folder = 'D:/Image/mm131.com/'
+local_folder = 'C:/Image/mm131.com/'
 first_page = 'http://www.mm131.com/mingxing/'
 first_page_list = ['http://www.mm131.com/xinggan/',
                    'http://www.mm131.com/qingchun/',
