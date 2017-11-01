@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
-import datetime
+#import datetime
 import os
-import sys
+#import sys
 import pymongo
-import pyquery
+#import pyquery
 
 
-def Get_Max_page(url):
+def get_Max_page(url):
+    """
+    Get max page number from the main page
+    """
     from pyquery import PyQuery as pq
     #print url
     page = pq(url=url)
@@ -19,7 +22,7 @@ def Get_Max_page(url):
     maxpage = replace2.replace('.html','')
     return int(maxpage)
 
-def Get_Page_Reference(url):
+def get_Page_Reference(url):
     from pyquery import PyQuery as pq
     page = pq(url=url)
     lastpage = page('.page')(':last').attr('href').__str__()
@@ -104,8 +107,8 @@ first_page_list = ['http://www.mm131.com/xinggan/',
 for page in first_page_list:
     folder = local_folder + page.replace('http://www.mm131.com/','')
     print local_folder
-    maxPageNumber = Get_Max_page(page)
-    referenceNumber = Get_Page_Reference(page)
+    maxPageNumber = get_Max_page(page)
+    referenceNumber = get_Page_Reference(page)
     print "Page: " + page
     print "Reference Number: " + referenceNumber.__str__()
     print "Max Page Numer: " + maxPageNumber.__str__()
